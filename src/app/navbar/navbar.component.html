@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+  <a class="navbar-brand" routerLink="/">App</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-md-auto">
+      <li class="nav-item active">
+        <a class="nav-link" 
+           routerLink="/">Inicio </a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" 
+           routerLink="/lista-proveedores">Proveedores</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" 
+           routerLink="/lista-presupuestos">Presupuestos</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" 
+            routerLink="/lista-facturas">Facturas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="!getLoged()"
+            routerLink="/login">Inicio sesión</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" *ngIf="getLoged()"
+              >Bienvenido {{usuario.nombre}}</a>
+        </li>
+      <button class="btn btn-primary" *ngIf="getLoged()" (click)="usuariosService.logout()">
+        Cerrar sesión
+      </button> 
+    </ul>
+    <div style="margin-top: 15px; padding-left: 15px;">     
+      <p></p>
+    </div>
+  </div>
+</nav>

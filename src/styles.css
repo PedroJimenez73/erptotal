@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+.primera {
+    margin-top: 80px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+.row {
+    position: relative;
+}
+.row .paginas {
+    position: absolute;
+    top:400px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

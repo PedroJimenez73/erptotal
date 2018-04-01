@@ -1,0 +1,112 @@
+<div class="row primera">
+  <div class="col-md-12">
+    <span class="text-center">Usuarios</span>
+    <span [@alerta]="stateName" class="alert alert-warning">{{mensaje}}</span>
+  </div>
+</div>
+<div class="row" [@nuevo]="stateNuevo">
+  <div class="col-md-12">
+    <div>
+      <form class="fila" [formGroup]="crearUsuarioForm" (ngSubmit)="guardarNuevoUsuario()">
+        <div class="nuevo"><input type="text" formControlName="nombre"
+                    placeholder="nombre"></div>
+        <div class="nuevo"><input type="text" formControlName="email"
+                    placeholder="email"></div>
+        <div class="nuevo"><input type="text" formControlName="password"
+                    placeholder="contraseña"></div>
+        <div class="nuevo">
+          <select formControlName="role" class="form-control">
+            <option value="admin">admin</option>
+            <option value="key-user">key-user</option>
+            <option value="user">user</option>
+          </select>
+        </div>
+        <div class="nuevo">
+          <button type="submit" class="btn btn-primary">
+            <i class="far fa-save"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div>
+      <div class="cabecera">
+          <div class="campo"><p>Nombre</p></div>
+          <div class="campo"><p>Email</p></div>
+          <div class="campo"><p>Rol</p></div>
+          <div class="campo">
+              <button *ngIf="!showNuevo"
+                      class="btn btn-primary" (click)="showFormNuevo()">
+                  <i class="fas fa-plus-square"></i>
+              </button>
+              <button  *ngIf="showNuevo"
+                      class="btn btn-danger" (click)="showFormNuevo()">
+                  <i class="fas fa-ban"></i>
+              </button>
+          </div>
+      </div>
+    </div>
+    <div *ngFor="let usuario of usuarios; let i=index">
+      <form class="fila" [formGroup]="usuarioForm" *ngIf="usuario._id === editFile">
+        <div class="campo"><input type="text" formControlName="nombre" [(ngModel)]="usuario.nombre"></div>
+        <div class="campo"><input type="text" formControlName="email" [(ngModel)]="usuario.email"></div>
+        <div class="campo">
+          <select formControlName="role" [(ngModel)]="usuario.role" class="form-control">
+            <option value="admin">admin</option>
+            <option value="key-user">key-user</option>
+            <option value="user">user</option>
+          </select>
+        </div>
+        <div class="campo">
+          <button (click)="onSubmit(usuario._id)" class="btn btn-primary">
+            <i class="far fa-save"></i>
+          </button>
+          <button (click)="cancelarEdicion()"class="btn btn-danger">
+              <i class="fas fa-ban"></i>
+          </button>
+        </div>
+      </form>
+      <div class="fila" *ngIf="usuario._id !== editFile">
+        <div class="campo"><p>{{usuario.nombre}}</p></div>
+        <div class="campo"><p>{{usuario.email}}</p></div>
+        <div class="campo"><p>{{usuario.role}}</p></div>
+        <div class="campo">
+          <button (click)="editUsuario(usuario._id)" class="btn btn-success"
+                  [disabled]="editFile && editFile !== usuario._id">
+            <i class="fas fa-pen-square"></i>
+          </button>
+          <button class="btn btn-danger"
+                  [disabled]="editFile && editFile !== usuario._id"
+                  data-toggle="modal" data-target="#exampleModal"
+                  (click)="eliminaId(usuario._id)">
+              <i class="fas fa-trash-alt"></i>
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">i</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  ¿Esta seguro de eliminar al usuario?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"
+                          (click)="borrarUsuario()">Si</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

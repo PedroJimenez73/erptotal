@@ -1,0 +1,48 @@
+<div class="row primera">
+  <div class="col-md-12">
+    <h1>Crear nuevo Proveedor</h1>
+    <form [formGroup]="proveedorForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre">
+      </div>
+      <div class="form-group">
+        <label for="cif">CIF</label>
+        <input type="text" class="form-control" formControlName="cif">
+      </div>
+      <div class="form-group">
+        <label for="domicilio">Domicilio</label>
+        <input type="text" class="form-control" formControlName="domicilio">
+      </div>
+      <div class="form-group">
+        <label for="cp">Código Postal</label>
+        <input type="number" class="form-control" formControlName="cp">
+      </div>
+      <div class="form-group">
+        <label for="localidad">Localidad</label>
+        <input type="text" class="form-control" formControlName="localidad">
+      </div>
+      <div class="form-group">
+        <label for="provincia">Provincia</label>
+        <select class="form-control" 
+               formControlName="provincia">
+          <option *ngFor="let provincia of provincias"
+          [value]="provincia">
+            {{provincia}}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="number" class="form-control" formControlName="telefono">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="mail" class="form-control" formControlName="email">
+      </div>
+      <button class="btn btn-primary" type="submit" [disabled]="proveedorForm.invalid">
+        Añadir proveedor
+      </button>
+    </form>
+  </div>
+</div>
